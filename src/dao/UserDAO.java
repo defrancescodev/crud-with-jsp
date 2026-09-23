@@ -13,17 +13,10 @@ public class UserDAO {
 
     public static Connection createConnection() {
         Connection connection = null;
-
         try {
-            // 1. Driver sem espaço extra
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // 2. URL correta do MySQL (Substitua 'nome_do_seu_banco' pelo nome real do banco de dados)
-            String url = "jdbc:mysql://localhost:3306/my_stuff?useSSL=false&serverTimezone=UTC";
-            String user = "root";
-            String password = "1234";
-
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_stuff?useSSL=false&serverTimezone=UTC", "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,6 +53,12 @@ public class UserDAO {
         }
 
         return userList;
+    }
+
+    public void deleteById() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
     }
 
     public static void main(String[] args) {
