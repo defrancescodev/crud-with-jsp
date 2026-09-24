@@ -55,9 +55,30 @@ public class UserDAO {
         return userList;
     }
 
+    public void saveUser(User user) {
+        String sql = "INSERT INTO usuarios (nome, senha, email, sexo, nacionalidade) VALUES (?, ?, ?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement preparedStatement= null;
+
+        try {
+            connection = createConnection();
+            preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getSex());
+            preparedStatement.setString(5, user.getNationality());
+            preparedStatement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteById() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+
 
     }
 
