@@ -75,11 +75,44 @@ public class UserDAO {
         }
     }
 
-    public void deleteById() {
+    public void deleteById(int id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
+        try {
+            connection = createConnection();
+            preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    public void updateUser(User user, int id) {
+        String sql = "UPDATE cursos SET nome = ?, senha = ?, email = ?, sexo = ?, nacionalidade = ? WHERE id = ?, ";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = createConnection();
+            preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getSex());
+            preparedStatement.setString(5, user.getNationality());
+            preparedStatement.setInt(6, id);
+            preparedStatement.execute();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
